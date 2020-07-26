@@ -71,19 +71,21 @@ app.post('/compose',function(req,resp){
   // console.log(posts)
 })
 
-app.get('/posts/:postTitle',function(req,resp){
-  const post=req.params.postTitle
+app.get('/posts/:postId',function(req,resp){
+  const post=req.params.postId
   console.log(post)
-  Post.find({title:post},(err,doc)=>{
+  Post.findOne({_id:post},(err,doc)=>{
     if(err){
       resp.render('Errors',{error:err})
       //setTimeout(()=>resp.redirect('/'),3000)
     }
-    else if(doc.length===0){
-      resp.render('Errors',{error:'404 not found'})
+
+    else if( doc==null){
+       resp.render('Errors',{error:'404 not found'})
     }
     else{
-      resp.render('post',{Title:doc[0].title,content:doc[0].content})
+      console.log(doc)
+      resp.render('post',{Title:doc.title,content:doc.content})
     }
       })
     // else{
