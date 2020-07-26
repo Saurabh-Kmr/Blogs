@@ -34,7 +34,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.get('/',function(req,resp){
-  Posts.find({},(err,doc)=>{
+  Post.find({},(err,doc)=>{
     if(err){
       resp.render('Errors',{error:err})
       //setTimeout(()=>resp.redirect('/'),3000)
@@ -72,18 +72,25 @@ app.post('/compose',function(req,resp){
 })
 
 app.get('/posts/:postTitle',function(req,resp){
-  const post=_.lowerCase(req.params.postTitle)
+  const post=req.params.postTitle
   console.log(post)
-  posts.forEach((element)=>{
-
-    if(post===_.lowerCase(element.postTitle)){
-      resp.render('post',{Title:element.postTitle,content:element.postBody});
+  Post.find({title:post},(err,doc)=>{
+    if(err){
+      resp.render('Errors',{error:err})
+      //setTimeout(()=>resp.redirect('/'),3000)
     }
+    else if(doc.length===0){
+      resp.render('Errors',{error:'404 not found'})
+    }
+    else{
+      resp.render('post',{Title:doc[0].title,content:doc[0].content})
+    }
+      })
     // else{
     //   resp.render('post',{Title:'Blog not found',content:'We could not find you are looking for'})
     // }
   })
-})
+// })
 
 
 
