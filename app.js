@@ -6,8 +6,7 @@ const ejs = require("ejs");
 const _ =require("lodash");
 const mongoose=require('mongoose');
 const postRoute = require('./Routes/posts')
-const composeRoute = require('./Routes/compose')
-const homeRoute = require('./Routes/home')
+
 
 mongoose.connect('mongodb://localhost:27017/Blogs',{ useNewUrlParser: true ,useUnifiedTopology: true})
         .then(() => {
@@ -28,11 +27,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-app.use('/',homeRoute)
 
 app.use('/posts',postRoute)
-
-app.use('/compose',composeRoute)
 
 app.get('/about',function(req,resp){
   resp.render('about',{content:aboutContent})
