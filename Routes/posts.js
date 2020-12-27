@@ -12,12 +12,13 @@ router.get('/',async (req,resp)=>{
       resp.status(400).json({message:"No posts found",data:null})
     }
     else{
-     console.log(post)
-    resp.status(200).json({message:"successful",data:post})
+     //console.log(post)
+   // resp.status(200).json({message:"successful",data:post})
+    resp.render('home',{content:"Placeholder",posts:post})
     }
   }
   catch(err){
-    resp.status(500).json({message:"Error",error:err})
+    resp.status(500).json({message:"Error",error:err.message})
   }
 })
 
@@ -55,7 +56,7 @@ router.post("/", async (req,resp)=>{
   }
   catch(err)
   {
-    resp.status(500).json({message:"Error",error:err})
+    resp.status(500).json({message:"Error",error:err.message})
     setTimeout(()=>resp.redirect('/'),3000)
   }
   // resp.redirect('/')
