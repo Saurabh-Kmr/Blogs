@@ -6,9 +6,9 @@ const ejs = require("ejs");
 const _ =require("lodash");
 const mongoose=require('mongoose');
 const postRoute = require('./Routes/posts')
+require('dotenv').config()
 
-
-mongoose.connect('mongodb://localhost:27017/Blogs',{ useNewUrlParser: true ,useUnifiedTopology: true})
+mongoose.connect(process.env.DB_NAME,{ useNewUrlParser: true ,useUnifiedTopology: true})
         .then(() => {
          console.log('Database connection successful')
        })
