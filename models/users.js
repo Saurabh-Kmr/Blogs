@@ -1,4 +1,6 @@
-const mongoose = require("mongoose")
+/*jshint esversion: 8 */
+
+const mongoose = require("mongoose");
 
 
 const userSchema= mongoose.Schema({
@@ -23,13 +25,24 @@ const userSchema= mongoose.Schema({
   role:[
       {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Roles"
+          ref: "Roles",
+          default: '1'
       }
   ],
   date:{
     type:Date,
     default:Date.now
   }
-})
+});
 
-export default mongoose.model('Users',userSchema)
+userSchema.methods.sanitizeFields= ()=>{
+ var returnObject = {
+   _id: this._id,
+   username: this.username,
+   email: this.email,
+   role: this.role
+ };
+ return returnObject;
+};
+
+export default mongoose.model('Users',userSchema);

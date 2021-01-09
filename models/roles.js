@@ -1,8 +1,9 @@
-const mongoose = require('mongoose')
+/*jshint esversion: 8 */
+
+const mongoose = require('mongoose');
 
 const roleSchema = new mongoose.Schema({
-    role: String,
-    default: 1
-})
+    role: String
+});
 
-export default mongoose.model('Roles',roleSchema)
+export default mongoose.model('Roles',roleSchema);

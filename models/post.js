@@ -1,4 +1,6 @@
-const mongoose = require("mongoose")
+/*jshint esversion: 6 */
+
+const mongoose = require("mongoose");
 
 
 const postSchema= mongoose.Schema({
@@ -14,6 +16,6 @@ const postSchema= mongoose.Schema({
     type:Date,
     default:Date.now
   }
-})
+});
 
-module.exports=mongoose.model('Posts',postSchema)
+module.exports=mongoose.model('Posts',postSchema);
