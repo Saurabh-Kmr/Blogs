@@ -39,6 +39,7 @@ router.get('/:postId',async (req,resp) =>{
   }
   catch(err){
     resp.status(500).json({message:"Error",error:err});
+    //Adding Test
   }
 });
 
